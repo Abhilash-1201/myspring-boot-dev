@@ -52,7 +52,7 @@ pipeline{
            steps {
            mail to: 'rlabhilash1201@gmail.com',
                 cc : 'rlabhilashabhi07@gamil.com'
-               subject: "test", 
+               subject: "INPUT: Dev Test Build", 
                body: "testing"
                 timeout(time: 60, unit: 'MINUTES'){
                     input message: "Promote to Production?", ok: "Promote"
