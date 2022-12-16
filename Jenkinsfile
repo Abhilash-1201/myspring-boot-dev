@@ -33,7 +33,8 @@ pipeline{
         stage('Building docker image')  {
          steps{
            script{
-               dockerImage = docker.build registry + ":$BUILD_NUMBER"
+               //dockerImage = docker.build registry + ":$BUILD_NUMBER"
+               sh 'docker build -t springbootapp:latest .'
            }
          }
        }
