@@ -48,11 +48,18 @@ pipeline{
            }
       
         }  
-   post{
+        stage('Hello') {
+            steps {
+                echo "Hello world"
+                    }
+            }
+        }
+    post{
         always{
-            mail to: "rlabhilash1201@gmail.com",
+            emailext to: "rlabhilash1201@gmail.com",
             subject: "Test Email",
-            body: "Test"
+            body: "Test",
+            attachLog: true
         }
     }
 
