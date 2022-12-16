@@ -29,5 +29,14 @@ pipeline{
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
+        // Build the docker image to store in to ECR
+        stage('Building docker image')  {
+         steps{
+           script{
+               dockerImage = docker.build registry + ":$BUILD_NUMBER"
+           }
+         }
+       }
+       
     }
 }
