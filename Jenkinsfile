@@ -46,8 +46,9 @@ pipeline{
                 sh 'docker push 519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:latest'
                }
            }
+      
         }  
-       post{
+   post{
         always{
             mail to: "rlabhilash1201@gmail.com",
             subject: "Test Email",
