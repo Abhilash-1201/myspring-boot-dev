@@ -1,5 +1,6 @@
 pipeline{
     agent any
+    environment { registry = "519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:latest"}
     tools {maven "MAVEN"}
     stages{
         stage('code checkout from GitHub'){
@@ -34,10 +35,19 @@ pipeline{
          steps{
            script{
                //dockerImage = docker.build registry + ":$BUILD_NUMBER"
-               sh 'docker build -t springbootapp:latest .'
+               sh 'docker build registry'
            }
          }
        }
-       
+        // Push the docker image in to ECR
+       stage('Pushing to ECR') {
+       steps{  
+         script {
+                sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 519852036875.dkr.ecr.us-east-2.amazonaws.com'
+                sh 'docker push 519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:latest'
+               }
+           }
+        }
+
     }
 }
