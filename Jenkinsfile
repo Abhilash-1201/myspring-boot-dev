@@ -50,7 +50,7 @@ pipeline{
         }  
     }
 post{
-    failure{
+   always{
         emailext to: "rlabhilash1201@gmail.com",
         subject: "jenkins build:test",
         body: "test build"
