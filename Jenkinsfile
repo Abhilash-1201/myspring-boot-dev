@@ -48,18 +48,12 @@ pipeline{
            }
       
         }  
-        stage ('Prompt check'){
-           steps {
-           mail to: 'rlabhilash1201@gmail.com',
-                cc : 'rlabhilashabhi07@gamil.com' 
-               body: "testing"
-                timeout(time: 60, unit: 'MINUTES'){
-                    input message: "Promote to Production?", ok: "Promote"
-                }
-            }
-        }
-        
     }
-
+post{
+    failure{
+        emailext to: "rlabhilash1201@gmail.com",
+        subject: "jenkins build:test",
+        body: "test build"
+        }
     }
 }
