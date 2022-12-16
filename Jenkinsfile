@@ -4,9 +4,11 @@ pipeline{
     stages{
         stage('code checkout from GitHub'){
             steps{
+                //check out code from the GitHub
                 git branch: 'main', url: 'https://github.com/Abhilash-1201/myspring-boot-dev.git'
             }
         }
+        //This stage gets all code Quality check from the GitHub Repository
         stage('Code Quality Check via SonarQube'){
             steps{
                 script{
@@ -23,7 +25,7 @@ pipeline{
         }
         stage('Build') {
             steps {
-                // Run Maven on a Unix agent.
+                // Build the Maven code after analysis
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
 
             }
