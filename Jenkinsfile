@@ -40,7 +40,7 @@ pipeline{
        }
         // Push the docker image in to ECR
        stage('Pushing to ECR') {
-       steps{  
+        steps{  
          script {
                 sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 519852036875.dkr.ecr.us-east-2.amazonaws.com'
                 sh 'docker push 519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:latest'
@@ -48,18 +48,18 @@ pipeline{
            }
       
         }  
-        stage('Hello') {
+        stage ('Prompt check'){
             steps {
-                echo "Hello world"
+            mail to: 'rlabhilash1201@gmail.com',
+                 cc : 'rlabhilashabhi07@gamil.com'
+                subject: "test", 
+                body: "testing"
+                timeout(time: 60, unit: 'MINUTES'){
+                    input message: "Promote to Production?", ok: "Promote"
+                }
             }
         }
-    post{
-        always{
-            emailext to: "rlabhilash1201@gmail.com",
-            subject: "Test Email",
-            body: "Test",
-            attachLog: true
-        }
+        
     }
 
     }
