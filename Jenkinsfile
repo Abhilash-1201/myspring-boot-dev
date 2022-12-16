@@ -27,9 +27,7 @@ pipeline{
             steps {
                 // Build the Maven code after analysis
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
-
             }
-
         }
     }
 }
