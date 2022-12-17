@@ -60,37 +60,5 @@ pipeline{
     }
 
     }
- post
- {
-     always
-     {
-         cleanWs()
-     }
-     success
-     {
-        slackSend channel: 'build-notifications',color: 'good', message: "started  JOB : ${env.JOB_NAME}  with BUILD NUMBER : ${env.BUILD_NUMBER}  BUILD_STATUS: - ${currentBuild.currentResult} To view the dashboard (<${env.BUILD_URL}|Open>)"
-        emailext attachLog: true, body: '''BUILD IS SUCCESSFULL - $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
  
-        Check console output at $BUILD_URL to view the results.
- 
-        Regards,
- 
-        Nithin John George
-        ''', compressLog: true, replyTo: 'njdevops321@gmail.com', 
-        subject: '$PROJECT_NAME - $BUILD_NUMBER - $BUILD_STATUS', to: 'njdevops321@gmail.com'
-     }
-     failure
-     {
-         slackSend channel: 'build-notifications',color: 'danger', message: "started  JOB : ${env.JOB_NAME}  with BUILD NUMBER : ${env.BUILD_NUMBER}  BUILD_STATUS: - ${currentBuild.currentResult} To view the dashboard (<${env.BUILD_URL}|Open>)"
-         emailext attachLog: true, body: '''BUILD IS FAILED - $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
- 
-        Check console output at $BUILD_URL to view the results.
- 
-        Regards,
- 
-        Nithin John George
-        ''', compressLog: true, replyTo: 'njdevops321@gmail.com', 
-        subject: '$PROJECT_NAME - $BUILD_NUMBER - $BUILD_STATUS', to: 'njdevops321@gmail.com'
-     }
- }
 }
