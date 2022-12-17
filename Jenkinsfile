@@ -62,9 +62,10 @@ pipeline{
     }
     post{
         always{
-            emailext to: "digin@cloudjournee.com",
-            subject: "Jenkins Dev Environment Build success",
+            emailext to: "satya@cloudjournee.com",
+            subject: "This is test email!!! [Jenkins Dev Environment Build success]",
             body: "Jenkins Dev Environment Build get successfull. Please click on the link to check the result http://dev.cjpinternal.ml/",
+                   
             attachLog: true
         }
     }
