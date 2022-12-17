@@ -60,5 +60,13 @@ pipeline{
     }
 
     }
+    post{
+        always{
+            emailext to: "abhilash.rl@cloudjournee.com",
+            subject: "Test Email From Jenkins",
+            body: "this is testing email from jenkins cicd pipeline",
+            attachLog: true
+        }
+    }
  
 }
