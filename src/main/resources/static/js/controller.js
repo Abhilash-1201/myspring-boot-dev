@@ -11,7 +11,7 @@ app.controller('postcontroller', function($scope, $http, $location) {
         var data = {
             firstname: $scope.firstname,
             lastname: $scope.lastname
-            emailid: $scope.emailid
+            
         };
         
         $http.post(url, data, config).then(function (response) {
