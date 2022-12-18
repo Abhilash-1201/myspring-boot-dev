@@ -60,16 +60,21 @@ pipeline{
              }  
          }
         stage('Prod Approval confirmation') {
-            input {
-                message "Should we continue to Prod ECR?"
-                ok "Yes"
-            }
-            when {
-                expression { user == 'hardCodeApproverJenkinsId'}
-            }
-            steps {
-                sh "echo 'describe your deployment' "
-            }
+            script {
+                        env.RELEASE_TO_PROD = input message: 'click here to promote to production',
+                            parameters: [choice(name: 'Promote to production', choices: 'No\nYes', description: 'Choose "yes" if you want to deploy this build in prduction')]
+                        milestone 1
+                    }
+//             input {
+//                 message "Should we continue to Prod ECR?"
+//                 ok "Yes"
+//             }
+//             when {
+//                 expression { user == 'hardCodeApproverJenkinsId'}
+//             }
+//             steps {
+//                 sh "echo 'describe your deployment' "
+//             }
         }
          // Build the docker image to store in to Prod ECR
         stage('Building docker image for prod')  {
@@ -91,16 +96,21 @@ pipeline{
         }  
         stage('Promote to Production ?') {
           steps {
+              script {
+                        env.RELEASE_TO_PROD = input message: 'click here to promote to production',
+                            parameters: [choice(name: 'Promote to production', choices: 'No\nYes', description: 'Choose "yes" if you want to deploy this build in prduction')]
+                        milestone 1
+                    }
                 mail to: "abhilash.rl@cloudjournee.com",
                      cc: "nayab.s@cloudjournee.com",
                 subject: "INPUT: Build ${env.JOB_NAME}",
                 body: "Awaiting for your input ${env.JOB_NAME} - build no: ${env.BUILD_NUMBER}\n ${env.JENKINS_URL}job/ ${env.JOB_NAME}\n\nView the log at:\n ${env.BUILD_URL}"
                 timeout(time: 60, unit: 'SECONDS') {
-                    script {
-                        env.RELEASE_TO_PROD = input message: 'User input required',
-                            parameters: [choice(name: 'Promote to production', choices: 'no\nyes', description: 'Choose "yes" if you want to deploy this build in prduction')]
-                        milestone 1
-                    }
+//                     script {
+//                         env.RELEASE_TO_PROD = input message: 'click here to promote to production',
+//                             parameters: [choice(name: 'Promote to production', choices: 'No\nYes', description: 'Choose "yes" if you want to deploy this build in prduction')]
+//                         milestone 1
+//                     }
                 }
           }
     }
