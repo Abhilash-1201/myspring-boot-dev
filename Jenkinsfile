@@ -44,6 +44,7 @@ pipeline{
        stage('Pushing docker image to Dev-ECR') {
         steps{  
          script {
+                sh 'docker logout'
                 sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 519852036875.dkr.ecr.us-east-2.amazonaws.com'
                 sh 'docker push 519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:${env.BUILD_NUMBER}'
                }
@@ -83,7 +84,7 @@ pipeline{
        stage('Pushing docker image to Prod-ECR') {
         steps{  
          script {
-                sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 519852036875.dkr.ecr.us-east-2.amazonaws.com'
+                //sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 519852036875.dkr.ecr.us-east-2.amazonaws.com'
                 sh 'docker push 519852036875.dkr.ecr.us-east-2.amazonaws.com/cloudjournee:${env.BUILD_NUMBER}'
                }
            }
