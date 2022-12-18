@@ -1,7 +1,6 @@
 pipeline{
     agent any
-    //test
-    def user
+    //te
 node {
   wrap([$class: 'BuildUser']) {
     user = env.BUILD_USER_ID
