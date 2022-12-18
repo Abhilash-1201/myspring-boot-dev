@@ -65,7 +65,7 @@ pipeline{
             steps{
             script {
                         env.RELEASE_TO_PROD = input message: 'Do you want to create prod build?',
-                            parameters: [choice(name: 'Promote to production', choices: 'No\nYes', description: 'Choose "yes" if you want to deploy this build in production')]
+                            //parameters: [choice(name: 'Promote to production', choices: 'No\nYes', description: 'Choose "yes" if you want to deploy this build in production')]
                         milestone 1
                     }
             }
@@ -105,7 +105,7 @@ pipeline{
             mail to: "abhilash.rl@cloudjournee.com",
                      cc: "nayab.s@cloudjournee.com",
                 subject: "SUCCESSFUL: Build ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
-                body: "Build Name:  ${env.JOB_NAME}\nBuild Number: ${env.BUILD_NUMBER}\nJenkins URL: ${env.JENKINS_URL}/job/${env.JOB_NAME}\n\nView the log at:\n ${env.BUILD_URL}"
+                body: "Build Name:  ${env.JOB_NAME}\nBuild Number: ${env.BUILD_NUMBER}\nJenkins URL: ${env.JENKINS_URL}/job/${env.JOB_NAME}/${env.BUILD_NUMBER}\n\nView the log at:\n ${env.BUILD_URL}"
             }
         }     
     }
