@@ -105,7 +105,7 @@ pipeline{
             mail to: "abhilash.rl@cloudjournee.com",
                      cc: "nayab.s@cloudjournee.com",
                 subject: "SUCCESSFUL: Build ${env.JOB_NAME} ${env.BUILD_NUMBER}",
-                body: "Build Name:  ${env.JOB_NAME}\nBuild Number: ${env.BUILD_NUMBER}\nJenkins URL: ${env.BUILD_URL}\n\n"
+                body: "Build Name:  ${env.JOB_NAME}\nBuild Number: ${env.BUILD_NUMBER}\nJenkins URL: ${env.BUILD_URL}\n\n Do you want to create prod build? parameters: [choice(name: 'Promote to production', choices: 'No\nYes', description: 'Choose "yes" if you want to deploy this build in production')]"
             }
         }     
     }
