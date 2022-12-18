@@ -1,7 +1,7 @@
 pipeline{
     agent any
-    environment { registry1 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:latest"
-                  registry2 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/cloudjournee:latest"
+    environment { registry1 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:${env.BUILD_NUMBER}"
+                  registry2 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/cloudjournee:${env.BUILD_NUMBER}"
                 }
     tools {maven "MAVEN"}
     stages{
@@ -45,7 +45,7 @@ pipeline{
         steps{  
          script {
                 sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 519852036875.dkr.ecr.us-east-2.amazonaws.com'
-                sh 'docker push 519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:latest'
+                sh 'docker push 519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:${env.BUILD_NUMBER}'
                }
            }
       
@@ -84,7 +84,7 @@ pipeline{
         steps{  
          script {
                 sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 519852036875.dkr.ecr.us-east-2.amazonaws.com'
-                sh 'docker push 519852036875.dkr.ecr.us-east-2.amazonaws.com/cloudjournee:latest'
+                sh 'docker push 519852036875.dkr.ecr.us-east-2.amazonaws.com/cloudjournee:${env.BUILD_NUMBER}'
                }
            }
       
@@ -105,7 +105,7 @@ pipeline{
             mail to: "digin@cloudjournee.com",
                  cc: "abhilash.rl@cloudjournee.com",
                 subject: "SUCCESSFUL: Build ${env.JOB_NAME} ${env.BUILD_NUMBER}",
-                body: "Build Successful!! Build ${env.JOB_NAME} with ${env.BUILD_NUMBER}\n\n\nBuild Name:  ${env.JOB_NAME}\nBuild Number: ${env.BUILD_NUMBER}\nJenkins URL: ${env.BUILD_URL}\n\nClick below link to proceed to prod environment\n\nhttp://3.21.248.19:8080/job/Pipeline%20-%20prod%204/build?token=123456"
+                body: "Build Successful!! Build ${env.JOB_NAME} with ${env.BUILD_NUMBER}\n\n\nBuild Name:  ${env.JOB_NAME}\nBuild Number: ${env.BUILD_NUMBER}\nJenkins URL: ${env.BUILD_URL}\n\nClick below link to proceed to prod environment\n\nhttp://3.21.248.19:8080/job/Pipeline%20-%20prod%204/buildWithParameters?token=123456&BuildNumber=${env.BUILD_NUMBER}"
             }
         }     
     }
