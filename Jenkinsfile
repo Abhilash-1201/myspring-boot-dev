@@ -1,7 +1,7 @@
 pipeline{
     agent any
-    environment { registry1 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:latest"}
-    environment { registry2 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/cloudjournee:latest"}
+    environment { registry = "519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:latest"}
+    //environment { registry = "519852036875.dkr.ecr.us-east-2.amazonaws.com/cloudjournee:latest"}
     tools {maven "MAVEN"}
     stages{
         stage('code checkout from GitHub'){
@@ -35,7 +35,7 @@ pipeline{
         stage('Building docker image')  {
          steps{
            script{
-               dockerImage = docker.build registry1
+               dockerImage = docker.build registry
            }
          }
        }
@@ -71,7 +71,7 @@ pipeline{
         stage('Building docker image')  {
          steps{
            script{
-               dockerImage = docker.build registry2
+               dockerImage = docker.build registry
            }
          }
        }
