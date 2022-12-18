@@ -93,7 +93,6 @@ pipeline{
     }
     post{
         always{
-            emailext mimeType: 'text/html',
             mail to: "abhilash.rl@cloudjournee.com",
                  cc: "nayab.s@cloudjournee.com",
             subject: "INPUT: Build ${env.JOB_NAME}",
