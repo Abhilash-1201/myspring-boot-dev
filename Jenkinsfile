@@ -46,7 +46,7 @@ pipeline{
          script {
                 sh 'docker logout'
                 sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 519852036875.dkr.ecr.us-east-2.amazonaws.com'
-                sh 'docker push 519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:${env.BUILD_NUMBER}'
+             sh 'docker push ${registry1}'
                }
            }
       
