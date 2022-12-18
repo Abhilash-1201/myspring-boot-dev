@@ -55,20 +55,28 @@ pipeline{
                     kubeconfigId: 'k8s',
                     enableConfigSubstitution: true
                     )               
-  
-      }  
-    }
+             }  
+         }
+        stage('Dev Approval confirmation') {
+            input {
+                message "Should we continue?"
+                ok "Yes"
+            }
+            steps {
+                sh "echo 'describe your deployment' "
+            }
+        }
        
     }
-//     post{
-//         always{
-//             mail to: "abhilash.rl@cloudjournee.com",
-//                  cc: "nayab.s@cloudjournee.com",
-//             subject: "INPUT: Build ${env.JOB_NAME}",
-//             body: "Awaiting for your input ${env.JOB_NAME} build no: ${env.BUILD_NUMBER}\n ${env.JENKINS_URL}job/ ${env.JOB_NAME}\n\nView the log at:\n ${env.BUILD_URL}"
-//             //input message: "Promote to Production?", ok: "Promote""
+    post{
+        always{
+            mail to: "abhilash.rl@cloudjournee.com",
+                 cc: "nayab.s@cloudjournee.com",
+            subject: "INPUT: Build ${env.JOB_NAME}",
+            body: "Awaiting for your input ${env.JOB_NAME} build no: ${env.BUILD_NUMBER}\n ${env.JENKINS_URL}job/ ${env.JOB_NAME}\n\nView the log at:\n ${env.BUILD_URL}"
+            //input message: "Promote to Production?", ok: "Promote""
                    
-//         }
-//     }
+        }
+    }
  
 }
