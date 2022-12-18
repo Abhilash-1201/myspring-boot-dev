@@ -105,7 +105,7 @@ pipeline{
             mail to: "abhilash.rl@cloudjournee.com",
                      //cc: "nayab.s@cloudjournee.com",
                 subject: "SUCCESSFUL: Build ${env.JOB_NAME} ${env.BUILD_NUMBER}",
-                body: "Build Name:  ${env.JOB_NAME}\nBuild Number: ${env.BUILD_NUMBER}\nJenkins URL: ${env.BUILD_URL}\n\nhttp://3.21.248.19:8080/job/email%20notification/build?token=123456"
+                body: "Build Name:  ${env.JOB_NAME}\nBuild Number: ${env.BUILD_NUMBER}\nJenkins URL: ${env.BUILD_URL}\n\nclick below link to proceed to prod environment\nhttp://3.21.248.19:8080/job/email%20notification/build?token=123456"
             }
         }     
     }
