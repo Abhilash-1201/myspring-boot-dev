@@ -96,11 +96,11 @@ pipeline{
         }  
         stage('Promote to Production ?') {
           steps {
-              script {
-                        env.RELEASE_TO_PROD = input message: 'click here to promote to production',
-                            parameters: [choice(name: 'Promote to production', choices: 'No\nYes', description: 'Choose "yes" if you want to deploy this build in prduction')]
-                        milestone 1
-                    }
+//               script {
+//                         env.RELEASE_TO_PROD = input message: 'click here to promote to production',
+//                             parameters: [choice(name: 'Promote to production', choices: 'No\nYes', description: 'Choose "yes" if you want to deploy this build in prduction')]
+//                         milestone 1
+//                     }
                 mail to: "abhilash.rl@cloudjournee.com",
                      cc: "nayab.s@cloudjournee.com",
                 subject: "INPUT: Build ${env.JOB_NAME}",
