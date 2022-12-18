@@ -65,7 +65,7 @@ pipeline{
             steps{
             script {
                         env.RELEASE_TO_PROD = input message: 'Do you want to create prod build?',
-                            //parameters: [choice(name: 'Promote to production', choices: 'No\nYes', description: 'Choose "yes" if you want to deploy this build in production')]
+                            parameters: [choice(name: 'Promote to production', choices: 'No\nYes', description: 'Choose "yes" if you want to deploy this build in production')]
                         milestone 1
                     }
             }
