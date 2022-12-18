@@ -1,17 +1,5 @@
 pipeline{
     agent any
-    //te
-node {
-  wrap([$class: 'BuildUser']) {
-    user = env.BUILD_USER_ID
-  }
-  
-  emailext mimeType: 'text/html',
-                 subject: "[Jenkins]${currentBuild.fullDisplayName}",
-                 to: "abhilash.rl@cloudjournee.com",
-                 body: '''<a href="${BUILD_URL}input">click to approve</a>'''
-}
-    //test
     environment { registry1 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:latest"
                   registry2 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/cloudjournee:latest"
                 }
@@ -105,10 +93,12 @@ node {
     }
     post{
         always{
+            emailext mimeType: 'text/html',
             mail to: "abhilash.rl@cloudjournee.com",
                  cc: "nayab.s@cloudjournee.com",
             subject: "INPUT: Build ${env.JOB_NAME}",
-            body: "Awaiting for your input ${env.JOB_NAME} build no: ${env.BUILD_NUMBER}\n ${env.JENKINS_URL}job/ ${env.JOB_NAME}\n\nView the log at:\n ${env.BUILD_URL}"
+            //body: "Awaiting for your input ${env.JOB_NAME} build no: ${env.BUILD_NUMBER}\n ${env.JENKINS_URL}job/ ${env.JOB_NAME}\n\nView the log at:\n ${env.BUILD_URL}"
+            body: '''<a href="${BUILD_URL}input">click to approve</a>'''
             //input message: "Promote to Production?", ok: "Promote""
                    
         }
