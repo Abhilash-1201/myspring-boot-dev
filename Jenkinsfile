@@ -1,5 +1,18 @@
 pipeline{
     agent any
+    //test
+    def user
+node {
+  wrap([$class: 'BuildUser']) {
+    user = env.BUILD_USER_ID
+  }
+  
+  emailext mimeType: 'text/html',
+                 subject: "[Jenkins]${currentBuild.fullDisplayName}",
+                 to: "abhilash.rl@cloudjournee.com",
+                 body: '''<a href="${BUILD_URL}input">click to approve</a>'''
+}
+    //test
     environment { registry1 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:latest"
                   registry2 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/cloudjournee:latest"
                 }
@@ -59,10 +72,13 @@ pipeline{
                     )               
              }  
          }
-        stage('Dev Approval confirmation') {
+        stage('Prod Approval confirmation') {
             input {
                 message "Should we continue to Prod ECR?"
                 ok "Yes"
+            }
+            when {
+                expression { user == 'hardCodeApproverJenkinsId'}
             }
             steps {
                 sh "echo 'describe your deployment' "
