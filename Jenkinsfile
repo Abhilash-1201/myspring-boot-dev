@@ -32,7 +32,7 @@ pipeline{
             }
         }
         // Build the docker image to store in to ECR
-        stage('Building docker image')  {
+        stage('Building docker image for dev')  {
          steps{
            script{
                dockerImage = docker.build registry1
@@ -68,7 +68,7 @@ pipeline{
             }
         }
          // Build the docker image to store in to Prod ECR
-        stage('Building docker image')  {
+        stage('Building docker image for prod')  {
          steps{
            script{
                dockerImage = docker.build registry2
