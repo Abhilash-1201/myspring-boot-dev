@@ -104,7 +104,7 @@ pipeline{
           steps {
             mail to: "abhilash.rl@cloudjournee.com",
                      cc: "nayab.s@cloudjournee.com",
-                subject: "SUCCESSFUL: Build ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
+                subject: "SUCCESSFUL: Build ${env.JOB_NAME} ${env.BUILD_NUMBER}",
                 body: "Build Name:  ${env.JOB_NAME}\nBuild Number: ${env.BUILD_NUMBER}\nJenkins URL: ${env.JENKINS_URL}/job/${env.JOB_NAME}/${env.BUILD_NUMBER}\n\nView the log at:\n ${env.BUILD_URL}"
             }
         }     
