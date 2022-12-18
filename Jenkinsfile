@@ -1,3 +1,15 @@
+def user
+node {
+  wrap([$class: 'BuildUser']) {
+    user = env.BUILD_USER_ID
+  }
+  
+  emailext mimeType: 'text/html',
+                 subject: "[Jenkins]${currentBuild.fullDisplayName}",
+                 to: "user@xxx.com",
+                 body: '''<a href="${BUILD_URL}input">click to approve</a>'''
+}
+
 pipeline{
     agent any
     environment { registry = "519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:latest"}
@@ -58,17 +70,29 @@ pipeline{
   
       }  
     }
+        stage('deploy') {
+            input {
+                message "Should we continue?"
+                ok "Yes"
+            }
+            when {
+                expression { user == 'hardCodeApproverJenkinsId'}
+            }
+            steps {
+                sh "echo 'describe your deployment' "
+            }
+        }
 
     }
-    post{
-        always{
-            mail to: "abhilash.rl@cloudjournee.com",
-                 cc: "nayab.s@cloudjournee.com",
-            subject: "INPUT: Build ${env.JOB_NAME}",
-            body: "Awaiting for your input ${env.JOB_NAME} build no: ${env.BUILD_NUMBER}\n ${env.JENKINS_URL}job/ ${env.JOB_NAME}\n\nView the log at:\n ${env.BUILD_URL}"
-            //input message: "Promote to Production?", ok: "Promote""
+//     post{
+//         always{
+//             mail to: "abhilash.rl@cloudjournee.com",
+//                  cc: "nayab.s@cloudjournee.com",
+//             subject: "INPUT: Build ${env.JOB_NAME}",
+//             body: "Awaiting for your input ${env.JOB_NAME} build no: ${env.BUILD_NUMBER}\n ${env.JENKINS_URL}job/ ${env.JOB_NAME}\n\nView the log at:\n ${env.BUILD_URL}"
+//             //input message: "Promote to Production?", ok: "Promote""
                    
-        }
-    }
+//         }
+//     }
  
 }
