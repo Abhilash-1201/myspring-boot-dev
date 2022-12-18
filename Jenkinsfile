@@ -64,8 +64,8 @@ pipeline{
         stage('Prod Approval confirmation') {
             steps{
             script {
-                        env.RELEASE_TO_PROD = input message: 'click here to promote to production',
-                            parameters: [choice(name: 'Promote to production', choices: 'No\nYes', description: 'Choose "yes" if you want to deploy this build in prduction')]
+                        env.RELEASE_TO_PROD = input message: 'Click here to promote to production',
+                            parameters: [choice(name: 'Promote to production', choices: 'No\nYes', description: 'Choose "yes" if you want to deploy this build in production')]
                         milestone 1
                     }
             }
@@ -89,13 +89,23 @@ pipeline{
            }
       
         }  
+//         //Deploy docker image in to prod eks 
+//        stage ('K8S Deploy') {
+//        steps { 
+//                 kubernetesDeploy(
+//                     configs: 'springboot-lb.yaml',
+//                     kubeconfigId: 'k8s',
+//                     enableConfigSubstitution: true
+//                     )               
+//              }  
+//          }
         //Email notification after build get successful
         stage('Build success email notification ') {
           steps {
             mail to: "abhilash.rl@cloudjournee.com",
                      cc: "nayab.s@cloudjournee.com",
-                subject: "INPUT: Build ${env.JOB_NAME}",
-                body: "Build Name:  ${env.JOB_NAME}\n Build Number: ${env.BUILD_NUMBER}\n Jenkins URL: ${env.JENKINS_URL}job/ ${env.JOB_NAME}\n\nView the log at:\n ${env.BUILD_URL}"
+                subject: "SUCCESSFUL: Build ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
+                body: "Build Name:  ${env.JOB_NAME}\nBuild Number: ${env.BUILD_NUMBER}\nJenkins URL: ${env.JENKINS_URL}job/ - ${env.JOB_NAME}\n\nView the log at:\n ${env.BUILD_URL}"
             }
         }     
     }
