@@ -62,11 +62,13 @@ pipeline{
     }
     post{
         always{
-            emailext to: "satya@cloudjournee.com",
-            subject: "This is test email!!! [Jenkins Dev Environment Build success]",
-            body: "Jenkins Dev Environment Build get successfull. Please click on the link to check the result http://dev.cjpinternal.ml/",
-                   
-            attachLog: true
+            emailext to: "abhilash.rl@cloudjournee.com",
+            cc : "nayab.s@cloudjournee.com"
+            subject: "INPUT: Build ${env.JOB_NAME}",
+            body: "Awaiting for your input ${env.JOB_NAME} build no: ${env.BUILD_NUMBER} .Click below to promote to production\n${env.JENKINS_URL}job/${env.JOB_NAME}\n\nView the log at:\n ${env.BUILD_URL}\n\nBlue Ocean:\n${env.RUN_DISPLAY_URL}"
+             timeout(time: 60, unit: 'MINUTES'){
+            input message: "Promote to Production?", ok: "Promote"
+          }
         }
     }
  
