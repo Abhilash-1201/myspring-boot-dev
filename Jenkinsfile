@@ -1,8 +1,8 @@
 pipeline{
-    agent { label 'slave' }
-    environment { registry1 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:${env.BUILD_NUMBER}"
-                  registry2 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/cloudjournee:${env.BUILD_NUMBER}"
-                }
+    agent any
+//     environment { registry1 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:${env.BUILD_NUMBER}"
+//                   registry2 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/cloudjournee:${env.BUILD_NUMBER}"
+//                 }
     tools {maven "MAVEN"}
     stages{
         stage('code checkout from GitHub'){
