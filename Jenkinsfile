@@ -109,6 +109,5 @@ pipeline{
 //                 body: "Build Successful!! Build ${env.JOB_NAME} with ${env.BUILD_NUMBER}\n\n\nBuild Name:  ${env.JOB_NAME}\nBuild Number: ${env.BUILD_NUMBER}\nJenkins URL: ${env.BUILD_URL}\n\nClick below link to proceed to prod environment\n\nhttp://3.21.248.19:8080/job/Pipeline%20-%20prod%204/buildWithParameters?token=123456&BuildNumber=${env.BUILD_NUMBER}"
 //             }
 //         }     
-    }
-   
+    }   
 }
