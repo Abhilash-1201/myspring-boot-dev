@@ -1,8 +1,8 @@
 pipeline{
     agent any
-//     environment { registry1 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:${env.BUILD_NUMBER}"
-//                   registry2 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/cloudjournee:${env.BUILD_NUMBER}"
-//                 }
+    environment { registry1 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:${env.BUILD_NUMBER}"
+                  //registry2 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/cloudjournee:${env.BUILD_NUMBER}"
+                }
     tools {maven "MAVEN"}
     stages{
         stage('code checkout from GitHub'){
@@ -32,25 +32,25 @@ pipeline{
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
-//         // Build the docker image to store in to ECR
-//         stage('Building docker image for dev')  {
-//          steps{
-//            script{
-//                dockerImage = docker.build registry1
-//            }
-//          }
-//        }
-//         // Push the docker image in to dev ECR
-//        stage('Pushing docker image to Dev-ECR') {
-//         steps{  
-//          script {
-//                 sh 'docker logout'
-//                 sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 519852036875.dkr.ecr.us-east-2.amazonaws.com'
-//              sh 'docker push ${registry1}'
-//                }
-//            }
+        // Build the docker image to store in to ECR
+        stage('Building docker image for dev')  {
+         steps{
+           script{
+               dockerImage = docker.build registry1
+           }
+         }
+       }
+        // Push the docker image in to dev ECR
+       stage('Pushing docker image to Dev-ECR') {
+        steps{  
+         script {
+                sh 'docker logout'
+                sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 519852036875.dkr.ecr.us-east-2.amazonaws.com'
+             sh 'docker push ${registry1}'
+               }
+           }
       
-//         }  
+        }  
 //         //Deploy docker image in to dev eks 
 //        stage ('K8S Deploy') {
 //        steps { 
