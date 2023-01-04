@@ -26,31 +26,31 @@ pipeline{
                 }
             }
         }
-        stage('Build') {
-            steps {
-                // Build the Maven code after analysis
-                sh "mvn -Dmaven.test.failure.ignore=true clean package"
-            }
-        }
+//        stage('Build') {
+//            steps {
+//                // Build the Maven code after analysis
+//                sh "mvn -Dmaven.test.failure.ignore=true clean package"
+//            }
+//        }
         // Build the docker image to store in to ECR
-        stage('Building docker image for dev')  {
-         steps{
-           script{
-               dockerImage = docker.build registry1
-           }
-         }
-       }
+//        stage('Building docker image for dev')  {
+//         steps{
+//           script{
+//               dockerImage = docker.build registry1
+//           }
+//         }
+//       }
         // Push the docker image in to dev ECR
-       stage('Pushing docker image to Dev-ECR') {
-        steps{  
-         script {
-                sh 'docker logout'
-                sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 519852036875.dkr.ecr.us-east-2.amazonaws.com'
-             sh 'docker push ${registry1}'
-               }
-           }
+//       stage('Pushing docker image to Dev-ECR') {
+//        steps{  
+//         script {
+//                sh 'docker logout'
+//                sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 519852036875.dkr.ecr.us-east-2.amazonaws.com'
+//             sh 'docker push ${registry1}'
+//               }
+//           }
       
-        }  
+//        }  
 //         //Deploy docker image in to dev eks 
 //        stage ('K8S Deploy') {
 //        steps { 
