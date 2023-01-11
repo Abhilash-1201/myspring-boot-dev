@@ -26,6 +26,12 @@ pipeline{
                 }
             }
         }
+        stage('slack') {
+            steps {
+                // build steps go here
+                slackSend color: 'good', message: 'Build started!'
+            }
+        }
 //        stage('Build') {
 //            steps {
 //                // Build the Maven code after analysis
@@ -111,14 +117,13 @@ pipeline{
 //         }     
     }   
      post {
-        always {
-            slackSend color: 'good', message: 'Build started!'
-        }
         success {
             slackSend color: 'good', message: 'Build succeeded!'
+            takeScreenShot attachment: true
         }
         failure {
             slackSend color: 'danger', message: 'Build failed!'
+            takeScreenShot attachment: true
         }
     }
 }
