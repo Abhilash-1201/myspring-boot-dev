@@ -18,8 +18,7 @@ pipeline{
                     //def scannerHome = tool 'sonarqube-scanner';
                     withSonarQubeEnv(credentialsId: 'SonarToken'){
                         if(fileExists("sonar-project.properties")) {
-                            sh "sonar-scanner-4.2.0.1873-linux"
-                         //  sh "mvn sonar:sonar"
+                           sh "mvn sonar:sonar"
                          //sh "${tool("sonarqube-scanner")}/bin/sonar-scanner"
                              
                          }  
