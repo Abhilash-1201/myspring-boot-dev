@@ -16,7 +16,7 @@ pipeline{
             steps{
                 script{
                     //def scannerHome = tool 'sonarqube-scanner';
-                    withSonarQubeEnv('SonarScanner'){
+                    withSonarQubeEnv('sonarqube-container'){
                         //sh "mvn sonar:sonar"
                         if(fileExists("sonar-project.properties")) {
                          sh "sonar-scanner"
