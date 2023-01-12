@@ -18,7 +18,7 @@ pipeline{
                     //def scannerHome = tool 'sonarqube-scanner';
                     withSonarQubeEnv(credentialsId: 'SonarToken'){
                         if(fileExists("sonar-project.properties")) {
-                         sh "/opt/sonar-scanner/sonar-scanner-4.8.0.2856-linux/bin/sonar-scanner"
+                         sh "sudo /opt/sonar-scanner/sonar-scanner-4.8.0.2856-linux/bin/sonar-scanner"
                          }  
                         
                     }
