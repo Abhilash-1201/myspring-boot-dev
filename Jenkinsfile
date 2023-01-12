@@ -18,7 +18,7 @@ pipeline{
                     //def scannerHome = tool 'sonarqube-scanner';
                     withSonarQubeEnv(credentialsId: 'SonarToken'){
                         if(fileExists("sonar-project.properties")) {
-                         sh "mvn sonar:sonar"
+                         sh "/usr/local/sonar-scanner/bin"
                          }  
                         
                     }
