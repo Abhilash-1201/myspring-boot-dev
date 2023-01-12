@@ -16,10 +16,10 @@ pipeline{
             steps{
                 script{
                     //def scannerHome = tool 'sonarqube-scanner';
-                    withSonarQubeEnv('sonarqube-container'){
-                        if(fileExists("sonar-project.properties")) {
-                         sh "/opt/sonar-scanner/sonar-scanner-4.8.0.2856-linux/bin/sonar-scanner"
-                         }  
+                    withSonarQubeEnv(credentialsId: 'SonarToken'){
+                        //if(fileExists("sonar-project.properties")) {
+                         sh "mvn sonar:sonar"
+                         //}  
                         
                     }
                 }
