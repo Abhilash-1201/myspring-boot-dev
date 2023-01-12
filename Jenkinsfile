@@ -19,7 +19,7 @@ pipeline{
                     withSonarQubeEnv('sonarqube-container'){
                         //sh "mvn sonar:sonar"
                         if(fileExists("sonar-project.properties")) {
-                         sh "sonar-scanner"
+                         sh "mvn sonar:sonar"
                          }  
                         
                     }
