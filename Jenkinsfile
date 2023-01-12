@@ -15,11 +15,10 @@ pipeline{
         stage('Code Quality Check via SonarQube'){
             steps{
                 script{
-                    //def scannerHome = tool 'sonarqube-scanner';
-                    withSonarQubeEnv('sonarqube-container'){
-                        //sh "mvn sonar:sonar"
+                    def scannerHome = tool 'sonarqube-scanner';
+                    withSonarQubeEnv(credentialsId: 'SonarToken'){
                         if(fileExists("sonar-project.properties")) {
-                         sh "mvn sonar:sonar"
+                         sh "${tool("sonarqube-scanner")}/bin/sonar-scanner"
                          }  
                         
                     }
