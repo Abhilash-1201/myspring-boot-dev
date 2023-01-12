@@ -17,9 +17,9 @@ pipeline{
                 script{
                     //def scannerHome = tool 'sonarqube-scanner';
                     withSonarQubeEnv(credentialsId: 'SonarToken'){
-                        //if(fileExists("sonar-project.properties")) {
+                        if(fileExists("sonar-project.properties")) {
                          sh "mvn sonar:sonar"
-                         //}  
+                         }  
                         
                     }
                 }
