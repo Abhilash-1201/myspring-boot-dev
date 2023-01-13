@@ -18,7 +18,7 @@ pipeline{
                     //def scannerHome = tool 'sonarqube-scanner';
                     withSonarQubeEnv('sonarqube-container'){
                         if(fileExists("sonar-project.properties")) {
-                         sh "sonar-scanner/bin"
+                         sh "/var/lib/jenkins/sonar-scanner-4.2.0.1873-linux/sonar-scanner/bin"
                          }  
                         
                     }
