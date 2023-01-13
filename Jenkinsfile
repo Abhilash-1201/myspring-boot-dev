@@ -18,7 +18,7 @@ pipeline{
                     //def scannerHome = tool 'sonarqube-scanner';
                     withSonarQubeEnv('sonarqube-container'){
                         if(fileExists("sonar-project.properties")) {
-                         sh "/opt/sonar-scanner/bin"
+                         sh "sonar-scanner/bin"
                          }  
                         
                     }
