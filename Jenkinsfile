@@ -21,16 +21,16 @@ pipeline{
             }
         }
         
-       stage("SonarQube Analysis") {
-           steps {
-               script {
-                    def propertiesFile = './sonar-project.properties'
-                    def properties = readFile(propertiesFile)
-                    def sonarUrl = properties.match(/sonar.host.url=\s*(.)/)[1]
-                    env.SONAR_URL = sonarUrl
-               }
-    }
-}
+//       stage("SonarQube Analysis") {
+  //         steps {
+   //            script {
+    //                def propertiesFile = './sonar-project.properties'
+     //               def properties = readFile(propertiesFile)
+      //              def sonarUrl = properties.match(/sonar.host.url=\s*(.)/)[1]
+       //             env.SONAR_URL = sonarUrl
+        //       }
+    //}
+//}
 
 
        stage('Build success email notification ') {
