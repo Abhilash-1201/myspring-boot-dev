@@ -15,7 +15,7 @@ pipeline{
         stage('Code Quality Check via SonarQube'){
             steps{
                 script{
-                    def propertiesFile = './sonar-project.properties'
+                    def propertiesFile = 'myspring-boot-dev/sonar-project.properties'
                     def properties = readFile(propertiesFile)
                     def sonarUrl = properties.match(/sonar.host.url=(.*)/)[1]
                     env.SONAR_URL = sonarUrl
