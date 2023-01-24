@@ -26,12 +26,16 @@ pipeline{
                 }
             }
         }
-//        stage('slack') {
-//            steps {
-//                // build steps go here
-//                slackSend color: 'good', message: 'Build started!'
-//            }
-//        }
+
+        stage('Email Notification for SoanrQube Analysis') {
+            steps {
+                emailext body: 'SonarQube analysis complete. http://3.17.56.121:9000/dashboard?id=maven',
+                subject: 'SonarQube Analysis Report',
+                to: 'deeptanshu.s@cloudjournee.com'
+            }
+        }
+        
+        
 //        stage('Build') {
 //            steps {
 //                // Build the Maven code after analysis
