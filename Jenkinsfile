@@ -29,7 +29,7 @@ pipeline{
 
       //  stage('Email Notification for SoanrQube Analysis') {
      //       steps {
-      /          emailext body: 'SonarQube analysis complete. http://3.17.56.121:9000/dashboard?id=maven',
+      //          emailext body: 'SonarQube analysis complete. http://3.17.56.121:9000/dashboard?id=maven',
        //         subject: 'SonarQube Analysis Report',
        //         to: 'deeptanshu.s@cloudjournee.com'
       //      }
