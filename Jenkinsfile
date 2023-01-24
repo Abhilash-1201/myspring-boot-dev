@@ -35,24 +35,49 @@ pipeline{
       //      }
      //   }
         
-       stage('Build success email notification ') {
-           steps {
-             mail to: "deeptanshu.s@cloudjournee.com",
-                  cc: "abhilash.rl@cloudjournee.com",
-                 subject: "SUCCESSFUL sonarQube analysis",
-                 body: """
-                 Hi Team,
+      // stage('Build success email notification ') {
+     //      steps {
+      //       mail to: "deeptanshu.s@cloudjournee.com",
+      //            cc: "abhilash.rl@cloudjournee.com",
+     //            subject: "SUCCESSFUL sonarQube analysis",
+     //            body: """
+     //            Hi Team,
+      //           
+      //           Please find the SonarQube Analysis Report with credentials below
+      //           
+      //           SonarQube Analysis Report : http://3.17.56.121:9000/dashboard?id=maven
+     //            Guest Username            : guest01
+      //           Guest Password            : guest01
                  
-                 Please find the SonarQube Analysis Report with credentials below
-                 
-                 SonarQube Analysis Report : http://3.17.56.121:9000/dashboard?id=maven
-                 Guest Username            : guest01
-                 Guest Password            : guest01
-                 
-                 Regards,
-                 Abhilash
-             }
-         }     
+       //          Regards,
+       //          Abhilash
+       //      }
+       //  }     
+        
+        stage('SonarQube Analysis Report mail') {
+            steps {
+                script {
+                    //def buildNumber = env.BUILD_NUMBER
+                    emailext (
+                      to: "deeptanshu.s@cloudjournee.com",
+                      subject: "SonarQube Analysis Report - Dev Team",
+                      body: """
+Hi Team,
+Please find the SonarQube Analysis Report with credentials below
+
+SonarQube Analysis Report : http://3.17.56.121:9000/dashboard?id=maven
+Guest Username            : guest01
+Guest Password            : guest01
+
+Regards,
+Abhilash
+                      """
+                    )
+                }
+            }
+        }
+        
+        
         
 //        stage('Build') {
 //            steps {
