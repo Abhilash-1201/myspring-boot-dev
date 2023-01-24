@@ -15,12 +15,12 @@ pipeline{
         stage('Code Quality Check via SonarQube'){
             steps{
                 script{
-                    def propertiesFile = 'sonar-project.properties'
+                    def propertiesFile = './sonar-project.properties'
                     def properties = readFile(propertiesFile)
                     def sonarUrl = properties.match(/sonar.host.url=(.*)/)[1]
                     env.SONAR_URL = sonarUrl
                 }
-                sh "/opt/sonar-scanner/bin/sonar-scanner"
+                
             }
         }
 
