@@ -40,7 +40,17 @@ pipeline{
              mail to: "deeptanshu.s@cloudjournee.com",
                   cc: "abhilash.rl@cloudjournee.com",
                  subject: "SUCCESSFUL sonarQube analysis",
-                 body: "SonarQube analysis complete. http://3.17.56.121:9000/dashboard?id=maven"
+                 body: """
+                 Hi Team,
+                 
+                 Please find the SonarQube Analysis Report with credentials below
+                 
+                 SonarQube Analysis Report : http://3.17.56.121:9000/dashboard?id=maven
+                 Guest Username            : guest01
+                 Guest Password            : guest01
+                 
+                 Regards,
+                 Abhilash
              }
          }     
         
