@@ -19,8 +19,8 @@ pipeline{
                     def properties = readFile(propertiesFile)
                     def sonarUrl = properties.match(/sonar.host.url=(.*)/)[1]
                     env.SONAR_URL = sonarUrl
-                    sh "/opt/sonar-scanner/bin/sonar-scanner"
                 }
+                sh "/opt/sonar-scanner/bin/sonar-scanner"
             }
         }
 
