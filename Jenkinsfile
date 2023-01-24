@@ -16,13 +16,6 @@ pipeline{
             steps{
                 script{
                     sh "/opt/sonar-scanner/bin/sonar-scanner"
-                    //def scannerHome = tool 'sonarqube-scanner';
-                    //withSonarQubeEnv('sonarqube-container'){
-                        //if(fileExists("sonar-project.properties")) {
-                         //sh "/opt/sonar-scanner/bin/sonar-scanner"
-                        // }  
-                        
-                    //}
                 }
             }
         }
@@ -34,42 +27,7 @@ pipeline{
                  subject: "SUCCESSFUL sonarQube analysis",
                  body: "Hi Team,\n\n\nPlease find the SonarQube Analysis Report with credentials below\n\n\nSonarQube Analysis Report : http://3.17.56.121:9000/dashboard?id=maven\n\nGuest Username: guest01\n\nGuest Password: guest01\n\nRegards,\nAbhilash"
              }
-         }  
-      //  stage('Email Notification for SoanrQube Analysis') {
-      //      steps {
-       //         emailext body: 'SonarQube analysis complete. http://3.17.56.121:9000/dashboard?id=maven',
-      //          subject: 'SonarQube Analysis Report',
-      //          to: 'deeptanshu.s@cloudjournee.com'
-      //     }
-     //   }
-        
-   
-        
-        //stage('SonarQube Analysis Report mail') {
-          //  steps {
-          //      script {
-          //          //def buildNumber = env.BUILD_NUMBER
-          //          emailext (
-          //            to: "deeptanshu.s@cloudjournee.com",
-           //           cc: "abhilash.rl@cloudjournee.com",
-           //           subject: "SonarQube Analysis Report - Dev Team",
-           //           body: """
-//Hi Team,
-//Please find the SonarQube Analysis Report with credentials below
-
-//SonarQube Analysis Report : http://3.17.56.121:9000/dashboard?id=maven
-///Guest Username            : guest01
-//Guest Password            : guest01
-
-//Regards,
-//Abhilash
- //                     """
-  //                  )
-//                }
-//            }
- //       }
-        
-        
+         }         
         
 //        stage('Build') {
 //            steps {
