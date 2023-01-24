@@ -15,6 +15,10 @@ pipeline{
         stage('Code Quality Check via SonarQube'){
             steps{
                 script{
+                    def propertiesFile = './sonar-project.properties'
+                    def properties = readFile(propertiesFile)
+                    def sonarUrl = properties.match(/sonar.host.url=(.*)/)[1]
+                    env.SONAR_URL = sonarUrl
                     sh "/opt/sonar-scanner/bin/sonar-scanner"
                 }
             }
@@ -25,7 +29,7 @@ pipeline{
              mail to: "deeptanshu.s@cloudjournee.com",
                   cc: "abhilash.rl@cloudjournee.com",
                  subject: "SUCCESSFUL sonarQube analysis",
-                 body: "Hi Team,\n\n\nPlease find the SonarQube Analysis Report with credentials below\n\n\nSonarQube Analysis Report : ${currentBuild.getUrl()}/sonar\n\nGuest Username: guest01\n\nGuest Password: guest01\n\nRegards,\nAbhilash"
+                 body: "Hi Team,\n\n\nPlease find the SonarQube Analysis Report with credentials below\n\n\nSonarQube Analysis Report : echo env.SONAR_URL\n\nGuest Username: guest01\n\nGuest Password: guest01\n\nRegards,\nAbhilash"
              }
          }         
         
