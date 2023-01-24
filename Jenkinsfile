@@ -15,7 +15,7 @@ pipeline{
         stage('Code Quality Check via SonarQube'){
             steps{
                 script{
-                    sh '/opt/bin/sonar-scanner'
+                    sh "/opt/sonar-scanner/bin/sonar-scanner"
                 }
                 
             }
