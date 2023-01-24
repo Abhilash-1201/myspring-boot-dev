@@ -20,18 +20,7 @@ pipeline{
                 
             }
         }
-        stage('Read sonar-project.properties') {
-            steps{
-                script{
-                def sonarProperties = readFile('sonar-project.properties')
-                def properties = new Properties()
-                properties.load(new StringReader(sonarProperties))
-                String sonarUrl = properties.getProperty("sonar.host.url")
-                String projectKey = properties.getProperty("sonar.projectKey")
-                }
-            }
-        }
-
+        
         
 //       stage("SonarQube Analysis") {
   //         steps {
