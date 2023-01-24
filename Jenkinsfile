@@ -60,6 +60,7 @@ pipeline{
                     //def buildNumber = env.BUILD_NUMBER
                     emailext (
                       to: "deeptanshu.s@cloudjournee.com",
+                      cc: "abhilash.rl@cloudjournee.com",
                       subject: "SonarQube Analysis Report - Dev Team",
                       body: """
 Hi Team,
