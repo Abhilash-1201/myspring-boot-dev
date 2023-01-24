@@ -26,7 +26,7 @@ pipeline{
                script {
                     def propertiesFile = './sonar-project.properties'
                     def properties = readFile(propertiesFile)
-                    def sonarUrl = properties.match(/sonar.host.url=(.*)/)
+                    def sonarUrl = properties.match(/sonar.host.url=\s*(.)/)
                     env.SONAR_URL = sonarUrl
                }
     }
