@@ -20,6 +20,15 @@ pipeline{
                 
             }
         }
+        stage('Read sonar-project.properties') {
+            def sonarProperties = readFile('sonar-project.properties')
+            def properties = new Properties()
+            properties.load(new StringReader(sonarProperties))
+            String sonarUrl = properties.getProperty("sonar.host.url")
+            String projectKey = properties.getProperty("sonar.projectKey")
+  
+        }
+
         
 //       stage("SonarQube Analysis") {
   //         steps {
@@ -35,10 +44,10 @@ pipeline{
 
        stage('Build success email notification ') {
            steps {
-             mail to: "deeptanshu.s@cloudjournee.com",
-                  cc: "abhilash.rl@cloudjournee.com",
+             mail to: "abhilash.rl@cloudjournee.com",
+                  //cc: "abhilash.rl@cloudjournee.com",
                  subject: "SUCCESSFUL sonarQube analysis",
-                 body: "Hi Team,\n\n\nPlease find the SonarQube Analysis Report with credentials below\n\n\nSonarQube Analysis Report : echo env.SONAR_URL\n\nGuest Username: guest01\n\nGuest Password: guest01\n\nRegards,\nAbhilash"
+                 body: "Hi Team,\n\n\nPlease find the SonarQube Analysis Report with credentials below\n\n\nSonarQube Analysis Report : sonarUrl\n\nGuest Username: guest01\n\nGuest Password: guest01\n\nRegards,\nAbhilash"
              }
          }         
         
