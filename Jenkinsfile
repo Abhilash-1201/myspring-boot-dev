@@ -24,7 +24,7 @@ pipeline{
        stage("SonarQube Analysis") {
            steps {
                script {
-                    def propertiesFile = '/opt/sonarqube/sonarqube-9.6.1.59531/conf/sonar.properties'
+                    def propertiesFile = './sonar-project.properties'
                     def properties = readFile(propertiesFile)
                     def sonarUrl = properties.match(/sonar.host.url=(.*)/)[1]
                     env.SONAR_URL = sonarUrl
