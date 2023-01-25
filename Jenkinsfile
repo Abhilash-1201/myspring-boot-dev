@@ -22,23 +22,12 @@ pipeline{
         }
         
         
-//       stage("SonarQube Analysis") {
-  //         steps {
-   //            script {
-    //                def propertiesFile = './sonar-project.properties'
-     //               def properties = readFile(propertiesFile)
-      //              def sonarUrl = properties.match(/sonar.host.url=\s*(.)/)[1]
-       //             env.SONAR_URL = sonarUrl
-        //       }
-    //}
-//}
-
 
        stage('Build success email notification ') {
            steps {
              mail to: "abhilash.rl@cloudjournee.com",
-                  //cc: "abhilash.rl@cloudjournee.com",
-                 subject: "SUCCESSFUL sonarQube analysis",
+                  cc: "deeptanshu.s@cloudjournee.com",
+                 subject: "SonarQube Guest Login Credentials",
                  body: "Hi Team,\n\n\nPlease find the SonarQube Analysis Report with credentials below\n\n\nSonarQube Analysis Report : sonarUrl\n\nGuest Username: guest01\n\nGuest Password: guest01\n\nRegards,\nAbhilash"
              }
          }         
