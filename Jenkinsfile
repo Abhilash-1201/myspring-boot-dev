@@ -1,9 +1,12 @@
 pipeline{
     agent any
-    environment { //registry1 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:${env.BUILD_NUMBER}"
+    environment {
+        result = currentBuild.result
+    }
+    //environment { //registry1 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:${env.BUILD_NUMBER}"
                   //registry2 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/cloudjournee:${env.BUILD_NUMBER}"
-                  result = currentBuild.result
-                }
+                  //result = currentBuild.result
+                //}
     //tools {maven "MAVEN"}
     stages{
         stage('code checkout from GitHub'){
@@ -17,6 +20,7 @@ pipeline{
             steps{
                 script{
                     sh "/opt/sonar-scanner/bin/sonar-scanner"
+                    result = currentBuild.result
                     
                 }
                 
