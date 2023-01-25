@@ -29,9 +29,9 @@ pipeline{
                 }
                 else if (result == 'SUCCESS') {
                      mail to: "abhilash.rl@cloudjournee.com",
-     //                   cc: "deeptanshu.s@cloudjournee.com",
-     //                  subject: "SonarQube Guest Login Credentials",
-     //                  body: "Hi Team,\n\n\nPlease find the SonarQube Analysis Report with credentials below\n\n\nSonarQube Analysis Report : http://18.188.146.124:9000/dashboard?id=maven
+                          cc: "deeptanshu.s@cloudjournee.com",
+                         subject: "SonarQube Guest Login Credentials",
+                         body: "Hi Team,\n\n\nPlease find the SonarQube Analysis Report with credentials below\n\n\nSonarQube Analysis Report : http://18.188.146.124:9000/dashboard?id=maven
                 }
                 //slackSend color: '#00FF00', message: 'SonarQube analysis complete. View the report at http://18.188.146.124:9000/dashboard?id=maven'
                // script {
