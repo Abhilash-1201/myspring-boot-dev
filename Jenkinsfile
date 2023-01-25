@@ -1,7 +1,7 @@
 pipeline{
     agent any
     environment {
-        result = currentBuild.result
+        result = sh(script: "echo $currentBuild.result", returnStdout: true)
     }
     //environment { //registry1 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/demo_project:${env.BUILD_NUMBER}"
                   //registry2 = "519852036875.dkr.ecr.us-east-2.amazonaws.com/cloudjournee:${env.BUILD_NUMBER}"
@@ -20,7 +20,7 @@ pipeline{
             steps{
                 script{
                     sh "/opt/sonar-scanner/bin/sonar-scanner"
-                    result = currentBuild.result
+                    result = sh(script: "echo $currentBuild.result", returnStdout: true)
                     
                 }
                 
