@@ -23,7 +23,7 @@ pipeline{
         
         stage('Slack Notification') {
             steps {
-                slackSend color: 'good', file: 'sonar-report.xml', fileType: 'xml', message: 'SonarQube analysis results'
+                slackSend color: 'good', attachments: [[path: 'sonar-report.xml']], message: 'SonarQube analysis results'
                // script {
                     //if (currentBuild.result == "FAILURE") {
                     //    slackSend color: 'danger', message: "SonarQube Analysis Failed: ${env.BUILD_URL}"
