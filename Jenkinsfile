@@ -20,7 +20,7 @@ pipeline{
             steps{
                 script{
                     sh "/opt/sonar-scanner/bin/sonar-scanner"
-                    result = sh(script: "echo $currentBuild.result", returnStdout: true)
+                    def qg = sh(returnStdout: true, script: 'curl -s -u admin:abhi "http://18.188.146.124:9000/api/qualitygates/project_status?projectKey=maven" | jq -r .projectStatus.status').trim()
                     
                 }
                 
@@ -30,10 +30,13 @@ pipeline{
         stage('Slack Notification') {
             steps {
                 script {
-                if (result == 'FAILURE') {
+                //if (result == 'FAILURE') {
+                //    slackSend color: '#FF0000', message: 'SonarQube analysis failed. View the report at http://18.188.146.124:9000/dashboard?id=maven'
+               // }
+                  if (qg == 'ERROR') {
                     slackSend color: '#FF0000', message: 'SonarQube analysis failed. View the report at http://18.188.146.124:9000/dashboard?id=maven'
                 }
-                else if (result == 'SUCCESS') {
+                else if (qg == 'OK') {
                      mail to: "abhilash.rl@cloudjournee.com",
                           cc: "deeptanshu.s@cloudjournee.com",
                          subject: "SonarQube Guest Login Credentials",
