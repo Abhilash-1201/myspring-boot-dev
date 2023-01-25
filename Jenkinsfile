@@ -20,7 +20,7 @@ pipeline{
             steps{
                 script{
                     sh "/opt/sonar-scanner/bin/sonar-scanner"
-                    def qg = sh(returnStdout: true, script: 'curl -s -u admin:abhi "http://18.188.146.124:9000/api/qualitygates/project_status?projectKey=maven" | jq -r .projectStatus.status').trim()
+                    //def qg = sh(returnStdout: true, script: 'curl -s -u admin:abhi "http://18.188.146.124:9000/api/qualitygates/project_status?projectKey=maven" | jq -r .projectStatus.status').trim()
                     
                 }
                 
@@ -30,6 +30,8 @@ pipeline{
         stage('Slack Notification') {
             steps {
                 script {
+                    def qg = sh(returnStdout: true, script: 'curl -s -u admin:abhi "http://18.188.146.124:9000/api/qualitygates/project_status?projectKey=maven" | jq -r .projectStatus.status').trim()
+                    
                 //if (result == 'FAILURE') {
                 //    slackSend color: '#FF0000', message: 'SonarQube analysis failed. View the report at http://18.188.146.124:9000/dashboard?id=maven'
                // }
