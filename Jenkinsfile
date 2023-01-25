@@ -15,7 +15,8 @@ pipeline{
         stage('Code Quality Check via SonarQube'){
             steps{
                 script{
-                    sh "/opt/sonar-scanner/bin/sonar-scanner -Dsonar.report.export.path=sonar-report.xml"
+                    sh "/opt/sonar-scanner/bin/sonar-scanner"
+                    def result = currentBuild.result
                 }
                 
             }
@@ -23,7 +24,16 @@ pipeline{
         
         stage('Slack Notification') {
             steps {
-                slackSend color: '#00FF00', message: 'SonarQube analysis complete. View the report at http://18.188.146.124:9000/dashboard?id=maven'
+                if (result == 'FAILURE') {
+                    slackSend color: '#FF0000', message: 'SonarQube analysis failed. View the report at http://18.188.146.124:9000/dashboard?id=maven'
+                }
+                else if (result == 'SUCCESS') {
+                     mail to: "abhilash.rl@cloudjournee.com",
+     //                   cc: "deeptanshu.s@cloudjournee.com",
+     //                  subject: "SonarQube Guest Login Credentials",
+     //                  body: "Hi Team,\n\n\nPlease find the SonarQube Analysis Report with credentials below\n\n\nSonarQube Analysis Report : http://18.188.146.124:9000/dashboard?id=maven
+                }
+                //slackSend color: '#00FF00', message: 'SonarQube analysis complete. View the report at http://18.188.146.124:9000/dashboard?id=maven'
                // script {
                     //if (currentBuild.result == "FAILURE") {
                     //    slackSend color: 'danger', message: "SonarQube Analysis Failed: ${env.BUILD_URL}"
