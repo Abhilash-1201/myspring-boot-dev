@@ -15,7 +15,7 @@ pipeline{
         stage('Code Quality Check via SonarQube'){
             steps{
                 script{
-                    sh "/opt/sonar-scanner/bin/sonar-scanner"
+                    sh "/opt/sonar-scanner/bin/sonar-scanner -Dsonar.report.export.path=sonar-report.xml"
                 }
                 
             }
@@ -23,13 +23,15 @@ pipeline{
         
         stage('Slack Notification') {
             steps {
-                script {
-                    if (currentBuild.result == "FAILURE") {
-                        slackSend color: 'danger', message: "SonarQube Analysis Failed: ${env.BUILD_URL}"
-                    } else {
+                slackSend color: 'good', file: 'sonar-report.xml', fileType: 'xml', message: 'SonarQube analysis results'
+               // script {
+                    //if (currentBuild.result == "FAILURE") {
+                    //    slackSend color: 'danger', message: "SonarQube Analysis Failed: ${env.BUILD_URL}"
+                    //} else {
                         slackSend color: 'good', message: "SonarQube Analysis Passed: ${env.BUILD_URL}"
-                    }
-                }
+                    //}
+                    
+              //  }
             }
         }    
 
