@@ -18,6 +18,7 @@ public class RestWebController {
     @RequestMapping(value = "/getallcustomer", method = RequestMethod.GET)
     public List<Customer> getResource(){
             return cust;
+     return cust;
     }
     
     @RequestMapping(value="/postcustomer", method=RequestMethod.POST)
@@ -25,5 +26,7 @@ public class RestWebController {
         cust.add(customer);
         
         return "Sucessful!";
+     return "Sucessful!";
+     
     }
 }
