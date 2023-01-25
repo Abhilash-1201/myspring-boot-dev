@@ -23,7 +23,7 @@ pipeline{
         
         stage('Slack Notification') {
             steps {
-                slackSend color: 'good', attachments: [[path: 'sonar-report.xml']], message: 'SonarQube analysis results'
+                slackSend color: '#00FF00', message: 'SonarQube analysis complete. View the report at http://18.188.146.124:9000/dashboard?id=maven'
                // script {
                     //if (currentBuild.result == "FAILURE") {
                     //    slackSend color: 'danger', message: "SonarQube Analysis Failed: ${env.BUILD_URL}"
@@ -40,7 +40,7 @@ pipeline{
      //        mail to: "abhilash.rl@cloudjournee.com",
      //             cc: "deeptanshu.s@cloudjournee.com",
      //            subject: "SonarQube Guest Login Credentials",
-     //            body: "Hi Team,\n\n\nPlease find the SonarQube Analysis Report with credentials below\n\n\nSonarQube Analysis Report : sonarUrl\n\nGuest Username: guest01\n\nGuest Password: guest01\n\nRegards,\nAbhilash"
+     //            body: "Hi Team,\n\n\nPlease find the SonarQube Analysis Report with credentials below\n\n\nSonarQube Analysis Report : http://18.188.146.124:9000/dashboard?id=maven\n\nGuest Username: guest01\n\nGuest Password: guest01\n\nRegards,\nAbhilash"
      //        }
      //    }         
         
