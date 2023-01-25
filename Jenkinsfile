@@ -28,7 +28,7 @@ pipeline{
                     //if (currentBuild.result == "FAILURE") {
                     //    slackSend color: 'danger', message: "SonarQube Analysis Failed: ${env.BUILD_URL}"
                     //} else {
-                        slackSend color: 'good', message: "SonarQube Analysis Passed: ${env.BUILD_URL}"
+                       // slackSend color: 'good', message: "SonarQube Analysis Passed: ${env.BUILD_URL}"
                     //}
                     
               //  }
