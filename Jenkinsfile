@@ -35,10 +35,10 @@ pipeline{
                 //if (result == 'FAILURE') {
                 //    slackSend color: '#FF0000', message: 'SonarQube analysis failed. View the report at http://18.188.146.124:9000/dashboard?id=maven'
                // }
-                  if (qg == 'ERROR') {
+                  if (currentBuild.result == "FAILURE") {
                     slackSend color: '#FF0000', message: 'SonarQube analysis failed. View the report at http://18.188.146.124:9000/dashboard?id=maven'
                 }
-                else if (qg == 'OK') {
+                else if (currentBuild.result == "PASS") {
                      mail to: "abhilash.rl@cloudjournee.com",
                           cc: "deeptanshu.s@cloudjournee.com",
                          subject: "SonarQube Guest Login Credentials",
