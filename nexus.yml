@@ -1,0 +1,51 @@
+---
+- name: Install Nexus Repository Manager
+  hosts: target_machine
+  become: yes
+
+  tasks:
+    - name: Install Java
+      yum:
+        name: java-1.8.0-openjdk
+        state: present
+
+    - name: Create Nexus user
+      user:
+        name: nexus
+        state: present
+
+    - name: Download Nexus
+      get_url:
+        url: "https://download.sonatype.com/nexus/3/latest-unix.tar.gz"
+        dest: /tmp/nexus.tar.gz
+
+    - name: Extract Nexus
+      unarchive:
+        src: /tmp/nexus.tar.gz
+        dest: /opt
+        creates: /opt/nexus
+
+    - name: Set up Nexus as a service
+      copy:
+        content: |
+          [Unit]
+          Description=nexus service
+          After=network.target
+
+          [Service]
+          Type=forking
+          LimitNOFILE=65536
+          ExecStart=/opt/nexus/bin/nexus start
+          ExecStop=/opt/nexus/bin/nexus stop
+          User=nexus
+          Restart=on-abort
+
+          [Install]
+          WantedBy=multi-user.target
+        dest: /etc/systemd/system/nexus.service
+
+    - name: Start and enable Nexus service
+      systemd:
+        name: nexus
+        enabled: yes
+        state: started
