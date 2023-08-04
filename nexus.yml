@@ -1,6 +1,6 @@
 ---
 - name: Install Nexus Repository Manager
-  hosts: target_machine
+  hosts: localhost
   become: yes
 
   tasks:
